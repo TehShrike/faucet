@@ -29,9 +29,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/substack/faucet.git"
+		"url": "git://github.com/TehShrike/faucet.git"
 	},
-	"homepage": "https://github.com/substack/faucet",
+	"homepage": "https://github.com/TehShrike/faucet",
 	"keywords": [
 		"tap",
 		"human",
