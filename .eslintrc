@@ -7,7 +7,6 @@
 		"func-style": ["error", "declaration"],
 		"max-lines-per-function": "off",
 		"max-statements-per-line": ["error", { "max": 2 }],
-		"no-plusplus": "warn",
 		"sort-keys": "off",
 		"no-magic-numbers": "off",
 		"no-plusplus": "off"
