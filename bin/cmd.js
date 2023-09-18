@@ -5,10 +5,7 @@
 var faucet = require('../');
 var minimist = require('minimist');
 var defined = require('defined');
-var which = require('npm-which');
-var tapeCmd = which.sync('tape', { cwd: process.cwd() });
 
-var spawn = require('child_process').spawn;
 var fs = require('fs');
 var path = require('path');
 
@@ -58,16 +55,3 @@ if (files.length === 0) {
 	console.error('No test files or stdin provided and no files in test/ or tests/ directories found.');
 	process.exit(1);
 }
-
-var tape = spawn(tapeCmd, files);
-tape.stderr.pipe(process.stderr);
-tape.stdout.pipe(tap).pipe(process.stdout);
-
-var tapeCode;
-tape.on('exit', function (code) { tapeCode = code; });
-process.on('exit', function (code) {
-	if (code === 0 && tapeCode !== 0) {
-		console.error('# non-zero exit from the `tape` command');
-		process.exit(tapeCode);
-	}
-});

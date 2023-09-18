@@ -4,13 +4,6 @@ var through2 = require('through2');
 var duplexer = require('duplexer');
 var parser = require('tap-parser');
 var sprintf = require('sprintf-js').sprintf;
-var forEach = require('array.prototype.foreach');
-var join = require('array.prototype.join');
-var map = require('array.prototype.map');
-var push = require('array.prototype.push');
-var slice = require('array.prototype.slice');
-var split = require('string.prototype.split');
-var trim = require('string.prototype.trim');
 var regexTester = require('safe-regex-test');
 
 var isPassing = regexTester(/^(tests|pass)\s+\d+$/);
@@ -23,7 +16,7 @@ module.exports = function (opts) {
 	function trimWidth(s, ok) {
 		if (opts && opts.width && s.length > opts.width - 2) {
 			var more = ok ? 0 : 4;
-			return slice(s, 0, opts.width - 5 - more) + '...';
+			return s.slice(0, opts.width - 5 - more) + '...';
 		}
 		return s;
 	}
@@ -63,7 +56,7 @@ module.exports = function (opts) {
 		var c = res.ok ? 32 : 31;
 		if (!test) {
 			// mocha produces TAP results this way, whatever
-			var s = trimWidth(trim(res.name));
+			var s = trimWidth(res.name.trim());
 			out.push(sprintf(
 				'\x1b[1m\x1b[' + c + 'm%s\x1b[0m\n',
 				trimWidth((res.ok ? '✓' : '⨯') + ' ' + s, res.ok)
@@ -83,20 +76,14 @@ module.exports = function (opts) {
 			test.ok = false;
 		}
 		out.push(str);
-		push(test.assertions, res);
+		test.assertions.push(res);
 	});
 
 	tap.on('extra', function (extra) {
 		if (!test || test.assertions.length === 0) { return; }
 		var last = test.assertions[test.assertions.length - 1];
 		if (!last.ok) {
-			out.push(join(
-				map(
-					split(extra, '\n'),
-					function (line) { return '  ' + line; }
-				),
-				'\n'
-			) + '\n');
+			out.push(extra.split('\n').map(function (line) { return '  ' + line; }).join('\n') + '\n');
 		}
 	});
 
@@ -109,7 +96,7 @@ module.exports = function (opts) {
 			out.push(updateName(test.offset + 1, '✓ ' + test.name, 32));
 		}
 
-		forEach(res.errors, function (err, ix) {
+		res.errors.forEach(function (err, ix) {
 			out.push(sprintf(
 				'not ok \x1b[1m\x1b[31m%d\x1b[0m %s\n',
 				ix + 1 + res.asserts.length,

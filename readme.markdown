@@ -2,6 +2,10 @@
 
 human-readable TAP summarizer
 
+# This is a fork of [faucet](https://github.com/ljharb/faucet)
+
+This one has fewer dependencies.  In particular, it doesn't add a dependency on tape.  I also removed a few other dependencies that enabled support for extremely outdated versions of node.
+
 # example
 
 Pipe TAP text into the `faucet` command, get back pretty results:
@@ -16,11 +20,6 @@ You can use any runner you want to generate the TAP output. Here we'll use
 You can give the `faucet` command a list of files:
 
 ![list of files](images/gutter.gif)
-
-or if you just type `faucet`, any js files in `test/` or `tests/` will be run
-using the `tape` command internally:
-
-![implicit test/ directory](images/dnode.gif)
 
 # install
 

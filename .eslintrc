@@ -9,24 +9,26 @@
 		"max-statements-per-line": ["error", { "max": 2 }],
 		"no-plusplus": "warn",
 		"sort-keys": "off",
+		"no-magic-numbers": "off",
+		"no-plusplus": "off"
 	},
 
 	"overrides": [
 		{
 			"files": "bin/**",
 			"env": {
-				"node": true,
+				"node": true
 			},
 			"rules": {
-				"no-process-exit": "off",
+				"no-process-exit": "off"
 			}
 		},
 		{
 			"files": "example/**",
 			"rules": {
 				"no-magic-numbers": "off",
-				"no-plusplus": "off",
-			},
-		},
-	],
+				"no-plusplus": "off"
+			}
+		}
+	]
 }
