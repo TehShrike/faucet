@@ -1,6 +1,6 @@
 {
 	"name": "@tehshrike/faucet",
-	"version": "0.0.4",
+	"version": "1.0.0",
 	"description": "human-readable TAP summarizer",
 	"main": "index.js",
 	"exports": {
